@@ -4,3 +4,5 @@
 convnet_test/dataset/raw/*
 convnet_test/dataset/processed/*
 
+!convnet_test/dataset/raw/README.md
+!convnet_test/dataset/processed/README.md
