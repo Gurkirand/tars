@@ -1,4 +1,6 @@
 .DS_Store
 *.swp
 *.pyc
+convnet_test/dataset/raw/*
+convnet_test/dataset/processed/*
 
