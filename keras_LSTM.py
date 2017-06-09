@@ -81,7 +81,7 @@ def sample(preds, temperature=1.0):
     return np.argmax(probas)
 
 # train the model, output generated text after each iteration
-for iteration in range(1, 60):
+for iteration in range(1, 6):
     print()
     print('-' * 50)
     print('Iteration', iteration)
@@ -89,7 +89,7 @@ for iteration in range(1, 60):
 
     start_index = random.randint(0, len(text) - maxlen - 1)
 
-    for diversity in [0.2]:
+    for diversity in [0.2, 0.5, 0.8, 1.2]:
         print()
         print('----- diversity:', diversity)
 
