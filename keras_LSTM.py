@@ -85,11 +85,11 @@ for iteration in range(1, 60):
     print()
     print('-' * 50)
     print('Iteration', iteration)
-    model.fit(X, y, batch_size=32, epochs=1)
+    model.fit(X, y, batch_size=128, epochs=10)
 
     start_index = random.randint(0, len(text) - maxlen - 1)
 
-    for diversity in [0.2, 0.5, 1.0, 1.2]:
+    for diversity in [0.2]:
         print()
         print('----- diversity:', diversity)
 
