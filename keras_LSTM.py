@@ -21,8 +21,19 @@ import random
 import sys
 
 # path = get_file('nietzsche.txt', origin='https://s3.amazonaws.com/text-datasets/nietzsche.txt')
-text = open('data/reddit_jokes.txt').read().lower()
-text = text[:50]
+# text = open('data/reddit_jokes.txt').read().lower()
+# text = text[:50]
+
+
+text = []
+with open('data/reddit_jokes.txt') as f:
+    for i in range(100000):
+        text.append(f.readline())
+
+
+
+
+
 print('corpus length:', len(text))
 
 chars = sorted(list(set(text)))
@@ -103,3 +114,4 @@ for iteration in range(1, 60):
             sys.stdout.write(next_char)
             sys.stdout.flush()
         print()
+
