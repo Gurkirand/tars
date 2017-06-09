@@ -25,10 +25,10 @@ import sys
 
 
 
-text = []
+text = ''
 with open('data/reddit_jokes.txt') as f:
     for i in range(5000):
-        text.append(f.readline())
+        text += f.readline()
 
 
 
