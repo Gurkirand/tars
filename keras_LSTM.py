@@ -22,7 +22,7 @@ import sys
 
 # path = get_file('nietzsche.txt', origin='https://s3.amazonaws.com/text-datasets/nietzsche.txt')
 text = open('data/reddit_jokes.txt').read().lower()
-text = text[:100000]
+text = text[:50]
 print('corpus length:', len(text))
 
 chars = sorted(list(set(text)))
