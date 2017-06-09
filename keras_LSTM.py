@@ -20,14 +20,14 @@ import numpy as np
 import random
 import sys
 
-# path = get_file('nietzsche.txt', origin='https://s3.amazonaws.com/text-datasets/nietzsche.txt')
-# text = open('data/reddit_jokes.txt').read().lower()
-# text = text[:50]
+#path = get_file('nietzsche.txt', origin='https://s3.amazonaws.com/text-datasets/nietzsche.txt')
+#text = open('data/reddit_jokes_50.txt').read().lower()
+
 
 
 text = []
 with open('data/reddit_jokes.txt') as f:
-    for i in range(50):
+    for i in range(5000):
         text.append(f.readline())
 
 
@@ -63,7 +63,7 @@ for i, sentence in enumerate(sentences):
 # build the model: a single LSTM
 print('Build model...')
 model = Sequential()
-model.add(LSTM(512, input_shape=(maxlen, len(chars))), regu)
+model.add(LSTM(512, input_shape=(maxlen, len(chars))))
 model.add(Dense(len(chars)))
 model.add(Activation('softmax'))
 
