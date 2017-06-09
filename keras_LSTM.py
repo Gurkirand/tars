@@ -27,7 +27,7 @@ import sys
 
 text = []
 with open('data/reddit_jokes.txt') as f:
-    for i in range(100000):
+    for i in range(50):
         text.append(f.readline())
 
 
