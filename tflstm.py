@@ -48,7 +48,7 @@ train_step = tf.train.AdamOptimizer(.1).minimize(cross_entropy)
 
 sess.run(tf.global_variables_initializer())
 
-for _ in range(1000):
+for _ in range(2000):
     hidden_update = np.zeros((1, hidden_dim))
     f1_int = np.random.randint(largest_number/2) # int version
     f1 = int2binary[f1_int] # binary encoding
@@ -75,5 +75,7 @@ l = int2binary[l_int]
 print l_int
 hidden_update = np.zeros((1, hidden_dim))
 for pos in range(binary_dim):
+    print l[pos]
     print l_2.eval(feed_dict={X: [[f1[pos], f2[pos]]], y: [[l[pos]]], last_hidden: hidden_update})
+    # print cross_entropy.eval(feed_dict={X: [[f1[pos], f2[pos]]], y: [[l[pos]]], last_hidden: hidden_update})
     hidden_update = l_1.eval(feed_dict={X: [[f1[pos], f2[pos]]], y: [[l[pos]]], last_hidden: hidden_update})
