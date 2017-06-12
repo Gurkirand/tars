@@ -80,6 +80,7 @@ for j in range(10000):
         overallError += np.abs(layer_2_error[0])
     
         # decode estimate so we can print it out
+        # d[binary_dim - position - 1] = np.round(layer_2[0][0])
         d[binary_dim - position - 1] = np.round(layer_2[0][0])
         
         # store hidden layer so we can use it in the next timestep
@@ -115,7 +116,7 @@ for j in range(10000):
     synapse_h_update *= 0
     
     # print out progress
-    if(j % 1000 == 0):
+    if(j % 2000 == 0):
         print "Error:" + str(overallError)
         print "Pred:" + str(d)
         print "True:" + str(c)
