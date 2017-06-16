@@ -80,7 +80,6 @@ for j in range(10000):
         overallError += np.abs(layer_2_error[0])
     
         # decode estimate so we can print it out
-        # d[binary_dim - position - 1] = np.round(layer_2[0][0])
         d[binary_dim - position - 1] = np.round(layer_2[0][0])
         
         # store hidden layer so we can use it in the next timestep
@@ -121,6 +120,7 @@ for j in range(10000):
         print "Pred:" + str(d)
         print "True:" + str(c)
         out = 0
+        print d
         for index,x in enumerate(reversed(d)):
             out += x*pow(2,index)
         print str(a_int) + " + " + str(b_int) + " = " + str(out)
