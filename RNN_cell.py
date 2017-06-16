@@ -33,7 +33,7 @@ class RNN_cell:
     def feed_forward(self, h):
         return tf.sigmoid(tf.matmul(h, self.Wo) + self.bo)
     
-    def full_pass_states(self, X):
+    def full_pass_states(self):
         states = tf.scan(self.update_state,
                 self.X,
                 initializer=self.initial_hidden)
@@ -41,8 +41,8 @@ class RNN_cell:
         return states
     
     def full_pass(self):
-        states = self.scan_states()
-        outputs = tf.map_fn(self.output, states)
+        states = self.full_pass_states()
+        outputs = tf.map_fn(self.feed_forward, states)
         return outputs
     
     def train(self, features, labels, batch_size, epochs, learning_rate):
@@ -50,11 +50,11 @@ class RNN_cell:
         
         outputs = self.full_pass()
         cross_entropy = -tf.reduce_sum(self.Y * tf.log(outputs) + (1 - self.Y) * tf.log(1 - outputs))
-        train_step = tf.train.AdamOptimizer().minimize(cross_entropy)
-        batch = tf.train.batch(self.inputs, batch_size)
+        train_step = tf.train.AdamOptimizer(learning_rate).minimize(cross_entropy)
+        batch = tf.train.shuffle_batch(self.inputs, batch_size)
         
         for _ in range(epochs):
             for _ in range(self.inputs.shape[0] / batch_size):
-                self._X = batch
-                train_step
-        
+                self.X = batch
+                train_step.eval()
+                

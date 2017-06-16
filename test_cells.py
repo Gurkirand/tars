@@ -36,13 +36,18 @@ def test():
     print "Labels shape: ", labels.shape
     
     features = np.reshape(features, (8, 10, 2))
+    labels = np.reshape(labels, (8, 10, 1))
     
     rnn = RNN_cell(2, 16, 1)
 
+    input = tf.placeholder(tf.float32, [None, None, 2])
+    output = tf.placeholder(tf.float32, [None, None, 1])
+    train = rnn.train(input, output, 10, 1, 0.1)
+    
     sess = tf.InteractiveSession()
     sess.run(tf.global_variables_initializer())
-    testrun = rnn.scan_outputs()
-    print sess.run(testrun, feed_dict={rnn._X: features})
+    # print sess.run(rnn.train, feed_dict={features: features, labels: labels, batch_size: 10, epochs: 1, learning_rate:0.1})
+    print sess.run(train, feed_dict={input: features, output:labels})
     
 
 
