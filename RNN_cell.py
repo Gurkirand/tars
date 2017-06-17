@@ -46,15 +46,21 @@ class RNN_cell:
         return outputs
     
     def train(self, features, labels, batch_size, epochs, learning_rate):
-        self.inputs = input;
-        
         outputs = self.full_pass()
         cross_entropy = -tf.reduce_sum(self.Y * tf.log(outputs) + (1 - self.Y) * tf.log(1 - outputs))
         train_step = tf.train.AdamOptimizer(learning_rate).minimize(cross_entropy)
-        batch = tf.train.shuffle_batch(self.inputs, batch_size)
         
-        for _ in range(epochs):
-            for _ in range(self.inputs.shape[0] / batch_size):
-                self.X = batch
-                train_step.eval()
-                
+
+        data_size = features.shape[0]
+        data_length = features.shape[1]
+        batches = []
+        
+        for i in range(0, data_size, batch_size):
+            batches.append([features[i:batch_size].reshape(data_length, data_size, self.input_size), labels[i:batch_size].reshape(data_length, data_size, self.output_size)])
+        
+        sess = tf.InteractiveSession()
+        sess.run(tf.global_variables_initializer())
+        for i in range(epochs):
+            for input, output in batches:
+                print sess.run([outputs, train_step], feed_dict={self.X: input, self.Y: output})
+
